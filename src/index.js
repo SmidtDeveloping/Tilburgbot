@@ -1,16 +1,17 @@
-const discord, { Intents } = require("discord.js")
-const client = new discord.Client({
+const { Client, Intents } = require("discord.js")
+const client = new Client({
     intents: [
         Intents.FLAGS.GUILDS
     ]
 })
 
+
 client.once("ready", () => {
-try {
-    console.log("Klaar")
-} catch (error) {
-    console.error(error)
-}
+    try {
+        console.log("Klaar")
+    } catch (error) {
+        console.error(error)
+    }
 })
 
-clinet.login(procces.env.token)
+client.login(process.env.token)
