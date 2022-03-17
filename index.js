@@ -50,7 +50,7 @@ client.once("messageCreate", async message => {
     var command = messagearray[0]
     
     
-    if(command == `${prefix}ping` {
+    if(command == `${prefix}ping` => {
        message.reply("pong")
        }
 
