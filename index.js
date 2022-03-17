@@ -48,6 +48,11 @@ client.once("messageCreate", async message => {
     var messagearray = message.content.split(" ")
 
     var command = messagearray[0]
+    
+    
+    if(command == `${prefix}ping` {
+       message.reply("pong")
+       }
 
     if (!message.content.startsWith(prefix)) return
 
