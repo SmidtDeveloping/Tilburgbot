@@ -20,6 +20,7 @@ for (const file of commandFiles) {
 	// With the key as the command name and the value as the exported module
 	client.commands.set(command.help.name, command);
         console.log(`Command: ${command.help.name} ✔ (${command.help.catogory})`.green)
+        console.log(`${command.help.description}`.blue)
 }
 
 client.once("ready", () => {
