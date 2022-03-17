@@ -25,8 +25,8 @@ for (const file of commandFiles) {
 client.once("ready", () => {
 const status0ptions = [
     "Hallo",
-    *TEST",
-     JEEEEEEJ"
+    "TEST",
+     "JEEEEEEJ"
 	]
 	
 let counter 0;
