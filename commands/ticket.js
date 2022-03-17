@@ -8,6 +8,11 @@ var username = message.author.username
 var userdiscriminator = message.author.discriminator
 
 var reden = args.join(" ")
+if(!reden) return
+
+var ticketbestaad = false;
+
+
 
 }
 
