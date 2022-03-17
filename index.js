@@ -23,21 +23,36 @@ for (const file of commandFiles) {
 }
 
 client.once("ready", () => {
-const status0ptions = [
-    "Hallo",
-    "TEST",
-     "JEEEEEEJ"
-	]
-	
-let counter = 0;
-// let time = 1 60 1000; // 1 Minuut.
-let time = 5 * 1000;
-const updatestatus = () -> (
-    client.user.setPresence((
+const statusoptions = [
+    `luisterd naar ${client.user.users}`,
+    `Luisterd naar ${client.user.guilds}`
+
+
+]
+
+let counter = 0 
+
+let time = 1 * 60 * 1000
+
+
+const updatestatus = () => {
+
+    client.user.setPresence({
+
+
         status: "online",
         activities: [
-                 name: statusoptions[counter]
-    );
+{
+    name: statusoptions[counter]
+}
+
+        ]
+
+
+
+    })
+    if(counter++ >- statusoptions.length) counter - 0;
+}
 })
 
 
