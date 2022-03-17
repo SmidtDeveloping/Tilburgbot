@@ -23,14 +23,21 @@ for (const file of commandFiles) {
 }
 
 client.once("ready", () => {
-    try {
-        var g = client.guilds.cache.get("920356898665021482")
-        console.log("Klaar")
-        client.user.setActivity(`${g.name}`, {type: "WATCHING"},)
-        
-    } catch (error) {
-        console.error(error)
-    }
+const status0ptions [
+    "Hallo",
+    *TEST",
+     JEEEEEEJ"
+	]
+	
+let counter 0;
+// let time = 1 60 1000; // 1 Minuut.
+let time = 5 1000;
+const updatestatus () -> (
+    client.user.setPresence((
+        status: "online",
+        activities: [
+                 name: statusoptions[counter]
+    );
 })
 
 
