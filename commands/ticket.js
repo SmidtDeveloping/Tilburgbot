@@ -99,6 +99,6 @@ module.exports.run = async (client, message, args) => {
 
 module.exports.help = {
     name: "new",
-    catogory: "Info",
-    description: "Geeft je informatie"
+    catogory: "ticket",
+    description: "new ticket"
 }
