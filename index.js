@@ -12,15 +12,14 @@ const client = new Client({
 
 client.commands = new Collection()
 
-const commandFiles = fs.readdirSync("./commands").filter(file => file.endsWith(".js"))
+const commandFiles = fs.readdirSync('./commands').filter(file => file.endsWith('.js'));
 
 for (const file of commandFiles) {
-
-    const command = require(`./commands/${file}`)
-
-    client.commands.set(command.help.name, command)
-    console.log(`Command: ${command.help.name} ✔`.green)
-    
+	const command = require(`./commands/${file}`);
+	// Set a new item in the Collection
+	// With the key as the command name and the value as the exported module
+	client.commands.set(command.help.name, command);
+        console.log(`Command: ${command.help.name} ✔`.green)
 }
 
 client.once("ready", () => {
