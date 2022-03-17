@@ -23,7 +23,7 @@ for (const file of commandFiles) {
 }
 
 client.once("ready", () => {
-const status0ptions [
+const status0ptions = [
     "Hallo",
     *TEST",
      JEEEEEEJ"
