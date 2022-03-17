@@ -29,7 +29,7 @@ const status0ptions = [
      "JEEEEEEJ"
 	]
 	
-let counter 0;
+let counter = 0;
 // let time = 1 60 1000; // 1 Minuut.
 let time = 5 1000;
 const updatestatus () -> (
