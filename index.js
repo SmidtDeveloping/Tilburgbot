@@ -1,11 +1,25 @@
-const { Client, Intents, MessageEmbed } = require("discord.js")
+const { Client, Intents, MessageEmbed, Collection } = require("discord.js")
 const { Prefix } = require("./config.json")
+const fs = require("node:fs")
 const client = new Client({
     intents: [
         Intents.FLAGS.GUILDS,
         Intents.FLAGS.GUILD_MESSAGES
     ]
 })
+
+
+client.commands = new Collection();
+
+
+const commandFiles = fs.readdirSync('./commands').filter(file => file.endsWith('.js'));
+
+for (const file of commandFiles) {
+	const command = require(`./commands/${file}`);
+	// Set a new item in the Collection
+	// With the key as the command name and the value as the exported module
+	client.commands.set(command.help.name, command);
+}
 
 client.once("ready", () => {
     console.log(Prefix);
