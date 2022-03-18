@@ -17,6 +17,7 @@ const client = new Client({
 
 client.once("ready", () => {
 console.log(`${client.user.username}`.green);
+console.log(config.prefix);
 })
 
 
