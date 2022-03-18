@@ -13,7 +13,7 @@ const client = new Client({
 
 client.commands = new Collection()
 
-const commandFiles = fs.readDirSync("./commands").filter(file => file.endsWith(".js")) 
+const commandFiles = fs.readdirsync("./commands").filter(file => file.endsWith(".js")) 
 
 for(const file of commandFiles) {
 	const command = require(`./commands/${file}`);
