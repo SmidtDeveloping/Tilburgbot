@@ -32,7 +32,7 @@ client.once("messageCreate", async message => {
 
     var command = messagearray[0]
 
-   if(command == `${prefix}info`) {
+   if(command === `${prefix}info`) {
     const embed = new MessageEmbed()
     embed.setTitle(`ServerInfo voor ${message.guild.name}`)
     embed.setColor("RANDOM")
