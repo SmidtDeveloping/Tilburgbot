@@ -50,8 +50,8 @@ const botembed = new MessageEmbed()
 botembed.setTitle(`Botinfo voor ${bot.user.username}`)
 botembed.setColor("RANDOM")
 botembed.setFields(
-    {name: "naam:", value: bot.user.username},
-    {name: "id", value: bot.user.id},
+    {name: "naam:", value: client.user.username},
+    {name: "id", value: client.user.id},
 )
 
 
