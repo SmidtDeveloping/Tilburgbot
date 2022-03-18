@@ -10,6 +10,7 @@ const client = new Client({
 client.once("ready", () => {
     console.log(Prefix);
     console.log(client.user.username);
+    client.user.setActivity("Tilburg", {type: "PLAYING"})
 })
 
 client.on("messageCreate", message => {
@@ -35,11 +36,11 @@ client.on("messageCreate", message => {
     embed.setThumbnail(message.guild.iconURL())
 
 const botembed = new MessageEmbed()
-botembed.setTitle(`Botinfo voor ${bot.user.username}`)
+botembed.setTitle(`Botinfo voor ${client.user.username}`)
 botembed.setColor("RANDOM")
 botembed.setFields(
-    {name: "naam:", value: bot.user.username},
-    {name: "id", value: bot.user.id},
+    {name: "naam:", value: client.user.username},
+    {name: "id", value: client.user.id},
 )
 
 
