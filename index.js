@@ -33,31 +33,9 @@ client.once("messageCreate", async message => {
 
     var command = messagearray[0]
 
-   if(command === `${prefix}info`) {
-    const embed = new MessageEmbed()
-    embed.setTitle(`ServerInfo voor ${message.guild.name}`)
-    embed.setColor("RANDOM")
-    embed.setFields(
-        {name: "Naam", value: message.guild.name},
-        {name: "membercount", value: message.guild.memberCount.toString()},
-        {name: "Roles", value: message.guild.roles.cache.size.toString()},
-        {name: "Channels", value: message.guild.channels.cache.size.toString()},
-        {name: "Id", value: message.guildId},
-),
-    embed.setThumbnail(message.guild.iconURL())
-
-const botembed = new MessageEmbed()
-botembed.setTitle(`Botinfo voor ${client.user.username}`)
-botembed.setColor("RANDOM")
-botembed.setFields(
-    {name: "naam:", value: client.user.username},
-    {name: "id", value: client.user.id},
-)
-
-
-
-    message.channel.send({embeds: [embed, botembed]})
-   }
+  if(command == `${prefix}info`) {
+      return message.channel.send("JAAA")
+  }
 })
 
 client.login(process.env.token)
