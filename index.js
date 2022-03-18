@@ -1,41 +1,29 @@
-const { Client, Intents, MessageEmbed, Collection } = require("discord.js")
-require("colors")
-const config = require("./config.json")
-const fs = require("fs")
+const { Client, Intents } = require("discord.js")
+const { Prefix } = require("./config.json")
 const client = new Client({
     intents: [
         Intents.FLAGS.GUILDS,
-        Intents.FLAGS.GUILD_MESSAGES,
-        Intents.FLAGS.GUILD_MEMBERS
+        Intents.FLAGS.GUILD_MESSAGES
     ]
 })
 
-
-
-
-
-
 client.once("ready", () => {
-console.log(`${client.user.username}`.green);
-console.log(config.prefix);
+    console.log(Prefix);
+    console.log(client.user.username);
 })
 
+client.on("messageCreate", message => {
+    
 
-client.once("messageCreate", async message => {
+    if (message.author.bot) return
 
-
-
-    if(message.author.bot) return
-
-    var prefix = config.prefix
-     
     var messagearray = message.content.split(" ")
 
     var command = messagearray[0]
 
-  if(command == `${prefix}info`) {
-      return message.channel.send("JAAA")
-  }
-})
+    if(command == `${Prefix}info`) {
+        return message.channel.send("Test")
+    }
+ })
 
-client.login(process.env.token)
+client.login(procces.env.token)
