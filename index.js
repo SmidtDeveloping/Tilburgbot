@@ -10,11 +10,12 @@ const client = new Client({
     ]
 })
 
+
 client.commands = new Collection()
 
-const commandFiles = fs.readdirSync('./commands').filter(file => file.endsWith('.js'));
+const commandFiles = fs.readDirSync("./commands").filter(file => file.endsWith(".js")) 
 
-for (const file of commandFiles) {
+for(const file of commandFiles) {
 	const command = require(`./commands/${file}`);
 	// Set a new item in the Collection
 	// With the key as the command name and the value as the exported module
@@ -23,78 +24,47 @@ for (const file of commandFiles) {
         console.log(`${command.help.description} }`.blue)
 }
 
+    const command = require(`./commands/${file}`)
+
+    client.commands.set(command.help.name, command)
+    console.log(`Command: ${command.help.name} (${command.help.catogory})`)
+
+
+
+
 client.once("ready", () => {
-const statusoptions = [
-    `luisterd naar ${client.user.users}`,
-    `Luisterd naar ${client.user.guilds}`
-
-
-]
-
-let counter = 0 
-
-let time = 1 * 60 * 1000
-
-
-const updatestatus = () => {
-
-    client.user.setPresence({
-
-
-        status: "online",
-        activities: [
-{
-    name: statusoptions[counter]
-}
-
-        ]
-
-
-
-    })
-    if(counter++ >- statusoptions.length) counter - 0;
-}
+console.log(`${client.user.username}`.green);
 })
 
 
 client.once("messageCreate", async message => {
 
 
-    if (message.author.bot) return
+
+    if(message.author.bot) return
 
     var prefix = config.prefix
-
-    
-
-
+     
     var messagearray = message.content.split(" ")
 
     var command = messagearray[0]
-    
-    
+
+     if(!message.content.startWit(prefix)) return
 
 
+     var commanddata = client.commands.get(command.slice(prefix.lenght))
 
 
-    const commanddata = client.commands.get(command.slice(prefix.length))
-
-    if (!commanddata) return
+    if(!commanddata) return
 
     var arguments = messagearray.slice(1)
 
-
     try {
-
         await commanddata.run(client, message, arguments)
-
     } catch (error) {
-        console.log(error)
+        console.error(error)
+        await message.reply("Er Was een fout tijdens dit commando")
     }
-
-
-
-
-
 })
 
 client.login(process.env.token)
