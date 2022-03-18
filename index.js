@@ -19,6 +19,9 @@ for (const file of commandFiles) {
 	// Set a new item in the Collection
 	// With the key as the command name and the value as the exported module
 	client.commands.set(command.help.name, command);
+    console.log(`Command: ${command.help.name}, (${commad.help.catogory})`)
+    console.log(`Desc: ${command.help.description}`)
+    console.log("-".repeat("36"))
 }
 
 client.once("ready", () => {
