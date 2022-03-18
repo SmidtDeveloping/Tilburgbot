@@ -72,7 +72,7 @@ botembed.setFields(
 
 
         if(command == `${Prefix}role`) {
-            var member = message.guild.menbers.cache.get(message.mentions.users.first().id)
+            var member = message.guild.members.cache.get(message.mentions.users.first().id)
             if(!member) return message.reply("Geen gebruiker gevonden")
 
         }
