@@ -47,7 +47,7 @@ client.once("messageCreate", async message => {
     embed.setThumbnail(message.guild.iconURL())
 
 const botembed = new MessageEmbed()
-botembed.setTitle(`Botinfo voor ${bot.user.username}`)
+botembed.setTitle(`Botinfo voor ${client.user.username}`)
 botembed.setColor("RANDOM")
 botembed.setFields(
     {name: "naam:", value: client.user.username},
