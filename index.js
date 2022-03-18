@@ -10,7 +10,7 @@ const client = new Client({
 
 
 client.commands = new Collection();
-
+client.events = new Collection();
 
 const commandFiles = fs.readdirSync('./commands').filter(file => file.endsWith('.js'));
 
@@ -23,6 +23,19 @@ for (const file of commandFiles) {
     console.log(`Command: ${command.help.name}, (${command.help.catogory})`)
     console.log(`Desc: ${command.help.description}`)
     console.log("-".repeat("36"))
+}
+
+const eventFiles = fs.readdirSync('./events').filter(file => file.endsWith(".js"))
+
+for(const file of eventFiles ) {
+    const event = require(`./events/${file}`)
+
+client.events.set(event.help.name, event)
+console.log("-".repeat("36"))
+console.log(`Command: ${event.help.name}, (${event.help.catogory})`)
+console.log(`Desc: ${event.help.description}`)
+console.log("-".repeat("36"))
+
 }
 
 client.once("ready", () => {
