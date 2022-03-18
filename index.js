@@ -10,6 +10,7 @@ const client = new Client({
 client.once("ready", () => {
     console.log(Prefix);
     console.log(client.user.username);
+    console.log(process.env.token)
     client.user.setActivity("Tilburg", {type: "PLAYING"})
 })
 
