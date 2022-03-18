@@ -66,6 +66,16 @@ botembed.setFields(
 
     message.channel.send({embeds: [embed, botembed]})
         }
+
+
+
+
+
+        if(command == `${Prefix}role`) {
+            var member = message.guild.menbers.cache.get(message.mentions.users.first().id)
+            if(!member) return message.reply("Geen gebruiker gevonden")
+
+        }
  })
 
 client.login(process.env.token)
