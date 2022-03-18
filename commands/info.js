@@ -28,5 +28,6 @@ botembed.setFields(
 module.exports.help = {
  name: "info",  
  catogory: "Info",
- description: "Geeft je informatie"
+ description: "Geeft je informatie",
+ aliases: ["server", "bot", "serverinfo", "botinfo"]
 }

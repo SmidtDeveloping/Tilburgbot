@@ -1,6 +1,7 @@
 const { Client, Intents, MessageEmbed, Collection } = require("discord.js")
 const { Prefix } = require("./config.json")
 const fs = require("node:fs")
+require("dotenv").config
 const client = new Client({
     intents: [
         Intents.FLAGS.GUILDS,
@@ -11,6 +12,8 @@ const client = new Client({
 
 client.commands = new Collection();
 client.events = new Collection();
+client.aliases = new Collection()
+
 
 const commandFiles = fs.readdirSync('./commands').filter(file => file.endsWith('.js'));
 
@@ -20,8 +23,8 @@ for (const file of commandFiles) {
 	// With the key as the command name and the value as the exported module
 	client.commands.set(command.help.name, command);
     console.log("-".repeat("36"))
-    console.log(`Command: ${command.help.name}, (${command.help.catogory})`)
-    console.log(`Desc: ${command.help.description}`)
+    console.log(`Command: ${command.help.name}, (${command.help.catogory})`.green)
+    console.log(`Desc: ${command.help.description}`.green)
     console.log("-".repeat("36"))
 }
 
@@ -32,17 +35,19 @@ for(const file of eventFiles ) {
 
 client.events.set(event.help.name, event)
 console.log("-".repeat("36"))
-console.log(`Command: ${event.help.name}, (${event.help.catogory})`)
-console.log(`Desc: ${event.help.description}`)
+console.log(`Event: ${event.help.name}, (${event.help.catogory})`.red)
+console.log(`Desc: ${event.help.description}`.red)
 console.log("-".repeat("36"))
 
 }
 
+
+
 client.once("ready", () => {
-    console.log(Prefix);
-    console.log(client.user.username);
-    console.log(process.env.token)
-    client.user.setActivity("Tilburg", {type: "PLAYING"})
+    console.log("Online".green)
+client.user.setActivity("Tilburg", {type: "LISTENING"})
+
+
 })
 
 client.on("messageCreate", message => {
@@ -75,10 +80,16 @@ botembed.setFields(
     {name: "id", value: client.user.id},
 )
 
+message.channel.send({embeds: [embed, botembed]})
+}
 
 
-    message.channel.send({embeds: [embed, botembed]})
-        }
+
+if(!message.content.startsWith(Prefix)) return
+
+
+
+
 
 
 
@@ -92,3 +103,8 @@ botembed.setFields(
  })
 
 client.login(process.env.token)
+
+
+
+// client.login("")
+
