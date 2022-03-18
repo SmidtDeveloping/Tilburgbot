@@ -11,23 +11,6 @@ const client = new Client({
 })
 
 
-client.commands = new Collection()
-
-const commandFiles = fs.readdirsync("./commands").filter(file => file.endsWith(".js")) 
-
-for(const file of commandFiles) {
-	const command = require(`./commands/${file}`);
-	// Set a new item in the Collection
-	// With the key as the command name and the value as the exported module
-	client.commands.set(command.help.name, command);
-        console.log(`Command: ${command.help.name} ✔ (${command.help.catogory}) {`.green)
-        console.log(`${command.help.description} }`.blue)
-}
-
-    const command = require(`./commands/${file}`)
-
-    client.commands.set(command.help.name, command)
-    console.log(`Command: ${command.help.name} (${command.help.catogory})`)
 
 
 
@@ -49,22 +32,31 @@ client.once("messageCreate", async message => {
 
     var command = messagearray[0]
 
-     if(!message.content.startWit(prefix)) return
+   if(command == `${prefix}info`) {
+    const embed = new MessageEmbed()
+    embed.setTitle(`ServerInfo voor ${message.guild.name}`)
+    embed.setColor("RANDOM")
+    embed.setFields(
+        {name: "Naam", value: message.guild.name},
+        {name: "membercount", value: message.guild.memberCount.toString()},
+        {name: "Roles", value: message.guild.roles.cache.size.toString()},
+        {name: "Channels", value: message.guild.channels.cache.size.toString()},
+        {name: "Id", value: message.guildId},
+),
+    embed.setThumbnail(message.guild.iconURL())
+
+const botembed = new MessageEmbed()
+botembed.setTitle(`Botinfo voor ${bot.user.username}`)
+botembed.setColor("RANDOM")
+botembed.setFields(
+    {name: "naam:", value: bot.user.username},
+    {name: "id", value: bot.user.id},
+)
 
 
-     var commanddata = client.commands.get(command.slice(prefix.lenght))
 
-
-    if(!commanddata) return
-
-    var arguments = messagearray.slice(1)
-
-    try {
-        await commanddata.run(client, message, arguments)
-    } catch (error) {
-        console.error(error)
-        await message.reply("Er Was een fout tijdens dit commando")
-    }
+    message.channel.send({embeds: [embed, botembed]})
+   }
 })
 
 client.login(process.env.token)
