@@ -83,7 +83,7 @@ client.on("messageCreate", message => {
 
 
                 message.delete()
-                return (await message.channel.send("Je mag niet schelden/Vloeken")).then(msg => {
+                return await message.channel.send("Je mag niet schelden/Vloeken").then(msg => {
                     setTimeout(() => {
                         msg.delete()
 
