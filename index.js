@@ -3,6 +3,8 @@ const { Prefix } = require("./config.json")
 const fs = require("node:fs")
 const levelFile = require("./data/levels.json")
 const woordenScheld = require("./data/woorden.json")
+const woordenScheldtop = require("./data/kickwoorden.json")
+
 var errorembed = new MessageEmbed()
 .setTitle("error")
 .setDescription("Error")
@@ -87,6 +89,23 @@ client.on("messageCreate", message => {
 
                     }, 3000 )
                 })
+            }
+
+            for (let index = 0; index < woordenScheldtop.length; index++) {
+                const hoofdscheldwoorden = woordenScheldtop[index];
+
+                if(msg.includes(woordenScheldtop.toLowerCase())) {
+
+
+                    message.delete()
+                    var kicker = message.author.id
+                    var reden = "Schelden met Kanker/erge scheldwoorden"
+
+                    kicker.kick(reden)
+
+                    return message.channel.send(kicker, "Gekickt", reden)
+                }
+                
             }
         }
     } else {
