@@ -12,13 +12,13 @@ module.exports.run  = async (client, message, args) => {
 
     var word = args[1]
 
-    const scheldwoordenJSON = fs.readFileSync("../data/woorden.json", 'utf-8')
+    const scheldwoordenJSON = fs.readFileSync("../data/woorden.json", 'utf8')
     const scheldwoorden = JSON.parse(scheldwoordenJSON)
 
     scheldwoorden.push(word)
 
 scheldwoordenJSON = JSON.stringify(scheldwoorden)
-    fs.writeFileSync("../data/woorden.json", scheldwoordenJSON, "utf-8")
+    fs.writeFileSync("../data/woorden.json", scheldwoordenJSON, "utf8")
     
 
     return channel.send(`je mag niet meer schelden met ${word}`)
