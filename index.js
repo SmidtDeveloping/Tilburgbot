@@ -1,6 +1,7 @@
 const { Client, Intents, MessageEmbed, Collection } = require("discord.js")
 const { Prefix } = require("./config.json")
 const fs = require("node:fs")
+require("colors")
 require("dotenv").config
 const client = new Client({
     intents: [
