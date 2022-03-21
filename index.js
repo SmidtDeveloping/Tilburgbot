@@ -6,18 +6,14 @@ const woordenScheld = require("./data/woorden.json")
 const woordenScheldtop = require("./data/kickwoorden.json")
 
 var errorembed = new MessageEmbed()
-.setTitle("error")
-.setDescription("Error")
+errorembed.setTitle("error")
+errorembed.setDescription("Error")
+
+
 require("colors")
 require("dotenv").config
-require("colors")
-const token = "OTUyNjc5NzM0NTc4MzgwODIw.Yi5iJA.eOI9Kvp1PUpQQDTy38mBviNV1IU"
 
-const { REST } = require("@discordjs/rest")
-const { Routes } = require("discord-api-types/v9")
 
-const SwearWords = require("./data/woorden.json")
-const levelFile = require("./data/xp.json")
 const client = new Client({
     intents: [
         Intents.FLAGS.GUILDS,
@@ -99,8 +95,22 @@ client.on("messageCreate", async message => {
 
 
 
-    
-    
+    if(!message.content.startsWith(Prefix)) {
+        return
+    }
+    const commandData = client.commands.get(command.slice(Prefix.length))
+
+    if(!commandData) return
+
+
+    var arguments = messagearray.slice(1)
+
+    try {
+        await commandData.run(client, message, arguments)
+    } catch (error) {
+        console.log(error)
+        await message.channel.send({embeds: [errorembed]})
+    }
 
 
 })
