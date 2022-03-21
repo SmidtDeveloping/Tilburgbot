@@ -1,33 +1,33 @@
-const discord = require("discord.js")
-const file = require("../data/woorden.json")
-const fs = require("node:fs")
+const  discord = require("discord.js")
+const fs = require("fs")
+const member = message
+const Perms = require("permissions")
+module.exports.run  = async (client, message, args) => {
+    const member = message.member
+    const channel = message.channel
 
+    if (!member.permissions.has("KICK_MEMBERS")) return message.reply("jij kan dit niet doen. ");
 
-
-module.exports.run = async (client, message, args) => {
-
-    if (!message.member.permissions.has("KICK_MEMBERS")) return message.reply("Je hebt geen perms")
-
-    if (!args[0]) return message.reply("Geen vloekwoord gevonden")
+    if(args[0] ) return channel.send("Geef een vloekwoord op")
 
     var word = args[0].toLowerCase()
 
-    var SwearWordsJSON = fs.readFileSync(file, "utf-8")
-    var swearwords = JSON.parse(SwearWordsJSON)
+    const scheldwoordenJSON = fs.readFileSync("../data/woorden.json", 'utf-8')
+    const scheldwoorden = JSON.parse(scheldwoordenJSON)
 
+    scheldwoorden.push(word)
 
-    swearwords.push(word)
+    scheldwoordenJSON = JSON.stringify(scheldwoorden)
+    fs.writeFileSync("../data/woorden.json", scheldwoordenJSON, "utf-8")
+    
 
-    SwearWordsJSON = JSON.stringify(swearwords)
-    fs.writeFileSync(file, swearwords, "utf-8")
+    return channel.send(`je mag niet meer schelden met ${word}`)
 
-
-    return message.channel.send(`Vloekwoord ${word} toegevoegd`)
 }
 
 module.exports.help = {
-    name: "scheldwoord",
-    catogory: "Info",
-    description: "Geeft je informatie",
-    aliases: []
+ name: "scheld",  
+ catogory: "mod",
+ description: "Geeft je informatie",
+ aliases: []
 }
