@@ -12,7 +12,7 @@ module.exports.run  = async (client, message, args) => {
 
     var word = args[1]
 
-    const scheldwoordenJSON = fs.readFileSync("../data/woorden.json", 'utf8')
+    const scheldwoordenJSON = fs.readFileSync("../data/woorden.json", {encoding: "utf8"})
     const scheldwoorden = JSON.parse(scheldwoordenJSON)
 
     scheldwoorden.push(word)
