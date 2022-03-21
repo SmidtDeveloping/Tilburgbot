@@ -1,7 +1,7 @@
 const  discord = require("discord.js")
 const fs = require("fs")
 const Perms = require("permissions")
-const file = require("/./data/woorden.json")
+const file = require("../data/woorden.json")
 module.exports.run  = async (client, message, args) => {
     const member = message.member
     const channel = message.channel
@@ -18,7 +18,7 @@ module.exports.run  = async (client, message, args) => {
     scheldwoorden.push(word)
 
 scheldwoordenJSON = JSON.stringify(scheldwoorden)
-    fs.writeFileSync("./data/woorden.json", scheldwoordenJSON, "utf-8")
+    fs.writeFileSync("../data/woorden.json", scheldwoordenJSON, "utf-8")
     
 
     return channel.send(`je mag niet meer schelden met ${word}`)
