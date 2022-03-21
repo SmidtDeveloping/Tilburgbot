@@ -12,7 +12,7 @@ module.exports.run  = async (client, message, args) => {
 
     var word = args[1]
 
-    const scheldwoordenJSON = fs.readFileSync(file, 'utf-8')
+    const scheldwoordenJSON = fs.readFileSync("../data/woorden.json", 'utf-8')
     const scheldwoorden = JSON.parse(scheldwoordenJSON)
 
     scheldwoorden.push(word)
@@ -23,6 +23,10 @@ scheldwoordenJSON = JSON.stringify(scheldwoorden)
 
     return channel.send(`je mag niet meer schelden met ${word}`)
 
+
+    if(args[1] === "hoofd") {
+        channel.send("hoofd schouders etc..")
+    }
 }
 
 module.exports.help = {
