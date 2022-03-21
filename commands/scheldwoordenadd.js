@@ -18,7 +18,7 @@ module.exports.run  = async (client, message, args) => {
     scheldwoorden.push(word)
 
 scheldwoordenJSON = JSON.stringify(scheldwoorden)
-    fs.writeFileSync(file, scheldwoordenJSON, "utf-8")
+    fs.writeFileSync("./data/woorden.json", scheldwoordenJSON, "utf-8")
     
 
     return channel.send(`je mag niet meer schelden met ${word}`)
