@@ -1,6 +1,7 @@
 const { Client, Intents, MessageEmbed, Collection } = require("discord.js")
 const { Prefix } = require("./config.json")
 const fs = require("node:fs")
+const levelFile = require("./data/levels.json")
 require("colors")
 require("dotenv").config
 const client = new Client({
@@ -60,33 +61,14 @@ client.on("messageCreate", message => {
 
     var command = messagearray[0]
 
-    if (command == `${Prefix}info`) {
-        const embed = new MessageEmbed()
-        embed.setTitle(`ServerInfo voor ${message.guild.name}`)
-        embed.setColor("RANDOM")
-        embed.setFields(
-            { name: "Naam", value: message.guild.name },
-            { name: "membercount", value: message.guild.memberCount.toString() },
-            { name: "Roles", value: message.guild.roles.cache.size.toString() },
-            { name: "Channels", value: message.guild.channels.cache.size.toString() },
-            { name: "Id", value: message.guildId },
-        ),
-            embed.setThumbnail(message.guild.iconURL())
 
-        const botembed = new MessageEmbed()
-        botembed.setTitle(`Botinfo voor ${client.user.username}`)
-        botembed.setColor("RANDOM")
-        botembed.setFields(
-            { name: "naam:", value: client.user.username },
-            { name: "id", value: client.user.id },
-        )
+    
 
-        message.channel.send({ embeds: [embed, botembed] })
+
+
+    if (!message.content.startsWith(Prefix)) {
+        RandomXP(message)
     }
-
-
-
-    if (!message.content.startsWith(Prefix)) return
 
 
 
@@ -103,9 +85,20 @@ client.on("messageCreate", message => {
     }
 })
 
+
+
+function RandomXP(message) {
+
+
+    var randomXP = Math.floor(Math.random() * 15) + 1
+
+    console.log(randomXP)
+}
 client.login(process.env.token)
 
 
 
 // client.login("")
+
+
 
