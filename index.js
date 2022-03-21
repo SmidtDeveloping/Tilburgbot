@@ -92,7 +92,7 @@ function RandomXP(message) {
 
     var randomXP = Math.floor(Math.random() * 15) + 1
 
-    console.log(`XP: ${randomXP} Member: ${message.author.tag}`)
+    console.log(`XP: ${randomXP} Member: ${message.author.tag} Message: ${message.content}`)
 }
 client.login(process.env.token)
 
