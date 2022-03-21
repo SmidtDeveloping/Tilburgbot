@@ -47,5 +47,6 @@ fs.writeFile("./warns.json", JSON.stringify(warns), (err) => {
 module.exports.help = {
  name: "warn",  
  catogory: "mod",
- description: "Geeft je informatie"
+ description: "Geeft je informatie",
+ aliases: []
 }
