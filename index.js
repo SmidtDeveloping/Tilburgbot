@@ -1,14 +1,13 @@
 const { Client, Intents, MessageEmbed, Collection, ApplicationCommand, } = require("discord.js")
 const { Prefix } = require("./config.json")
 const fs = require("node:fs")
-const levelFile = require("../data/levels.json")
-const woordenScheld = require("../data/woorden.json")
-const woordenScheldtop = require("../data/kickwoorden.json")
+const levelFile = require("./data/levels.json")
+const woordenScheld = require("./data/woorden.json")
+const woordenScheldtop = require("./data/kickwoorden.json")
 
 var errorembed = new MessageEmbed()
 errorembed.setTitle("error")
 errorembed.setDescription("Error")
-
 
 require("colors")
 require("dotenv").config
