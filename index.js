@@ -2,6 +2,10 @@ const { Client, Intents, MessageEmbed, Collection } = require("discord.js")
 const { Prefix } = require("./config.json")
 const fs = require("node:fs")
 const levelFile = require("./data/levels.json")
+const woordenScheld = require("./data/woorden.json")
+var errorembed = new MessageEmbed()
+.setTitle("error")
+.setDescription("Error")
 require("colors")
 require("dotenv").config
 const client = new Client({
@@ -68,6 +72,46 @@ client.on("messageCreate", message => {
 
     if (!message.content.startsWith(Prefix)) {
         RandomXP(message)
+
+        var msg =  message.content.toLowerCase()
+
+        for (let index = 0; index < woordenScheld.length; index++) {
+            const Scheldwoord = woordenScheld[index];
+            if(msg.includes(woordenScheld.toLowerCase())) {
+
+
+                message.delete()
+                return (await message.channel.send("Je mag niet schelden/Vloeken")).then(msg => {
+                    setTimeout(() => {
+                        msg.delete()
+
+                    }, 3000 )
+                })
+            }
+        }
+    } else {
+
+    if (message.author.bot) return
+
+    var messagearray = message.content.split(" ")
+
+    var command = messagearray[0]
+
+    const comamnddata = client.commands.get(command.slice(Prefix.lenght))
+
+    if(!commanddata) return
+
+    var arguments = messagearray.slice(1)
+    try {
+        
+
+await comamnddata.run(client,message,arguments)
+
+    } catch (error) {
+        console.log(error)
+        
+        await message.channel.send({embeds: [errorembed]})
+    }
     }
 
 
@@ -124,7 +168,7 @@ function RandomXP(message) {
 
 
       var levelembed = new MessageEmbed()
-      .setbescription("**Nieuw level**")
+      .setDescription("**Nieuw level**")
       .setcolor("#00FF00")
       .addField("Nieuw Level:", levelFile[userID].level.toString())
       .addField("XP:", levelFile[userID].xp.toString())
