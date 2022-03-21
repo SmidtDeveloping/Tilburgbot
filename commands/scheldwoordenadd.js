@@ -9,7 +9,7 @@ module.exports.run  = async (client, message, args) => {
 
     if(args[1] ) return channel.send("Geef een vloekwoord op")
 
-    var word = args[1].toLowerCase()
+    var word = args[1]
 
     const scheldwoordenJSON = fs.readFileSync("../data/woorden.json", 'utf-8')
     const scheldwoorden = JSON.parse(scheldwoordenJSON)
