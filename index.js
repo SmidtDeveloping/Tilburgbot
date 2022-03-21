@@ -93,6 +93,43 @@ function RandomXP(message) {
     var randomXP = Math.floor(Math.random() * 15) + 1
 
     console.log(`XP: ${randomXP} Member: ${message.author.tag} Message: ${message.content}`)
+
+    var userID = message.author.id
+
+
+    if(!levelFile[userID]) {
+        levelFile[userID] = {
+            xp: 0,
+            level: 0
+        }
+    }
+
+    levelFile[userID].xp += randomXP
+
+
+    var levelUser = levelFile[userID].level
+    var xpuser = levelFile[userID].xp
+    var nextlevelXP = levelUser * 300
+
+
+    if(nextlevelXP == 0 ) nextlevelXP = 100
+
+    if(xpuser >= nextlevelXP) {
+      levelFile[userID].level += 1
+
+      fs.WriteFile("./data/levels.json", JSON.stringify(levelFile),
+      err => {
+          if(err) return console.log("Iets ging fout mien jong")
+      })
+
+
+      var levelembed = new MessageEmbed()
+      .setbescription("**Nieuw level**")
+      .setcolor("#00FF00")
+      .addField("Nieuw Level:", levelFile[userID].level.toString())
+      .addField("XP:", levelFile[userID].xp.toString())
+      message.channel.send({embeds: [levelembed]})
+    }
 }
 client.login(process.env.token)
 
