@@ -12,8 +12,8 @@ module.exports.run  = async (client, message, args) => {
 
     var word = args[1]
 
-    const scheldwoordenJSON = fs.readFileSync("../data/woorden.json", {encoding: "utf8"})
-    const scheldwoorden = JSON.parse(scheldwoordenJSON)
+    var swearwordsJson =  fs.readFileSync("../data/woorden.json", "utf-8");
+    var scheldwoorden = JSON.parse(scheldwoordenJSON)
 
     scheldwoorden.push(word)
 
