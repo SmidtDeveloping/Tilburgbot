@@ -1,7 +1,7 @@
 const  discord = require("discord.js")
 const fs = require("fs")
 const Perms = require("permissions")
-var file = ("./data/woorden.json")
+const file = require("./data/woorden.json")
 module.exports.run  = async (client, message, args) => {
     const member = message.member
     const channel = message.channel
