@@ -22,6 +22,7 @@ module.exports.run = async (client, message, args) => {
 
     kickuser.ban({reason: reden}).catch(err => {
         if (err) return message.channel.send("Foutje!")
+        console.log(err)
     })
     
 message.reply(`${kickuser} is gekickt`)
