@@ -1,6 +1,5 @@
 const  discord = require("discord.js")
 const fs = require("fs")
-const member = message
 const Perms = require("permissions")
 module.exports.run  = async (client, message, args) => {
     const member = message.member
