@@ -20,7 +20,7 @@ module.exports.run = async (client, message, args) => {
 
     var reden = args.slice(1).join(" ")
 
-    kickuser.ban(reden).catch(err => {
+    kickuser.ban({reasen: reden}).catch(err => {
         if (err) return message.channel.send("Foutje!")
     })
     
