@@ -17,7 +17,7 @@ module.exports.run  = async (client, message, args) => {
 
     scheldwoorden.push(word)
 
-    scheldwoordenJSON = JSON.stringify(scheldwoorden)
+scheldwoordenJSON = JSON.stringify(scheldwoorden)
     fs.writeFileSync(file, scheldwoordenJSON, "utf-8")
     
 
