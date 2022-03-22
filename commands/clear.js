@@ -10,7 +10,7 @@ if(!args[0]) return message.reply("Geef een aantaal mee")
 if(parseInt(args[0])) {
 
 
-var amount = args[0] + 1
+var amount = parseInt(args[0]) + 1
 
 message.channel.bulkDelete(amount).then(() => {
 
