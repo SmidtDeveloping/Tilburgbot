@@ -42,8 +42,8 @@ return message.channel.send("Geef een gatal hoger dan 0 op")
 
 
 module.exports.help = {
- name: "status",  
- catogory: "Info",
- description: "Geeft je informatie",
+ name: "clear",  
+ catogory: "mod",
+ description: "Clear command",
  aliases: []
 }
