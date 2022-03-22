@@ -51,7 +51,7 @@ message.author.send(response).then(() => {
 
         
     } catch (error) {
-        
+        console.log(error)
     }
 }
 
