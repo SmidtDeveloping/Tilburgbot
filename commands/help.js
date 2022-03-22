@@ -18,7 +18,8 @@ client.commands.forEach(command => {
     
 
     switch (command.help.catogory) {
-        case "general" += `${prefix}${command.help.name} - ${command.help.description}`:
+
+        case "general" :
             general += `${prefix}${command.help.name} - ${command.help.description}`
             break;
 
