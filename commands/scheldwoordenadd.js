@@ -7,9 +7,9 @@ module.exports.run  = async (client, message, args) => {
     if (!message.member.permissions.has("KICK_MEPBERS")) return message.reply("jij kan dit niet doen.");
 
 
-if(args[0]) return message.reply("Geen vloekwoord mee gegeven")
+if(args[1]) return message.reply("Geen vloekwoord mee gegeven")
 
-var word = args[0]
+var word = args[1]
 
 var jsonfile = fs.readFileSync("../data/woorden.json", "utf-8")
 var woorden = JSON.parse(jsonfile)
