@@ -9,7 +9,7 @@ module.exports.run  = async (client, message, args) => {
 
 if(args[0]) return message.reply("Geen vloekwoord mee gegeven")
 
-var word = args[0].tolowerCase();
+var word = args[0]
 
 var jsonfile = fs.readFileSync("../data/woorden.json", "utf-8")
 var woorden = JSON.parse(jsonfile)
