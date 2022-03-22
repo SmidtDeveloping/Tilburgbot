@@ -11,7 +11,7 @@ module.exports.run  = async (bot, message, args) => {
         {name: "Id", value: message.guildId},
 ),
     embed.setThumbnail(message.guild.iconURL())
-
+    
 const botembed = new MessageEmbed()
 botembed.setTitle(`Botinfo voor ${bot.user.username}`)
 botembed.setColor("RANDOM")
