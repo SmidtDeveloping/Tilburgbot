@@ -1,13 +1,27 @@
 const { Client, Intents, MessageEmbed, Collection, ApplicationCommand, } = require("discord.js")
 const { Prefix } = require("./config.json")
 const fs = require("node:fs")
+const { REST } = require('@discordjs/rest');
+const { Routes } = require('discord-api-types/v9');
 const levelFile = require("./data/levels.json")
 const woordenScheld = require("./data/woorden.json")
 const woordenScheldtop = require("./data/kickwoorden.json")
 
 var errorembed = new MessageEmbed()
-errorembed.setTitle("error")
-errorembed.setDescription("Error")
+.setColor("RANDOM")
+.setTitle('Er is een error opgetreden')
+.setAuthor({ name: 'Command Error'})
+.setDescription('Some description here')
+.addFields(
+    { name: 'Regular field title', value: 'Some value here' },
+    { name: '\u200B', value: '\u200B' },
+    { name: 'Inline field title', value: 'Some value here', inline: true },
+    { name: 'Inline field title', value: 'Some value here', inline: true },
+)
+.addField('Inline field title', 'Some value here', true)
+.setImage('https://i.imgur.com/AfFp7pu.png')
+.setTimestamp()
+.setFooter({ text: 'Some footer text here', iconURL: 'https://i.imgur.com/AfFp7pu.png' });
 
 require("colors")
 require("dotenv").config
@@ -22,8 +36,16 @@ const client = new Client({
     ]
 })
 
+const commands = [];
+const commandslashFiles = fs.readdirSync('./slashcommands').filter(file => file.endsWith('.js'));
 
 client.commands = new Collection();
+client.slashCommands = new Collection();
+
+for (const file of commandFiles) {
+	const command = require(`./slashcommands/${file}`);
+	commands.push(command.data.toJSON());
+}
 
 
 
@@ -40,7 +62,22 @@ for (const file of commandFiles) {
     console.log("-".repeat("36"))
 }
 
+const rest = new REST({ version: '9' }).setToken(process.env.token);
 
+(async () => {
+	try {
+		console.log('Started refreshing application (/) commands.');
+
+		await rest.put(
+			Routes.applicationGuildCommands(clientId, guildId),
+			{ body: commands },
+		);
+
+		console.log('Successfully reloaded application (/) commands.');
+	} catch (error) {
+		console.error(error);
+	}
+})();
 
 client.once("ready", () => {
     console.log("Online".green)
@@ -48,21 +85,6 @@ client.once("ready", () => {
 
 
 
-
-    // const guild = client.guilds.cache.get('920356898665021482')
-
-    // let commands
-
-    // if (guild) {
-    //     commands = guild.commands
-    // } else {
-    //     commands = client.application.commands
-    // }
-
-    // commands.create({
-    //     name: 'ping',
-    //     description: "Ponger"
-    // })
 
 
 
