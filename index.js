@@ -81,20 +81,7 @@ client.once("ready", () => {
 })
 
 
-client.on('interactionCreate', async interaction => {
-    if (!interaction.isCommand()) return;
 
-    const command = client.slashCommands.get(interaction.commandName);
-
-    if (!command) return;
-
-    try {
-        await command.execute(interaction);
-    } catch (error) {
-        console.error(error);
-        await interaction.reply({ content: 'There was an error while executing this command!', ephemeral: true });
-    }
-});
     const rest = new REST({ version: '9' }).setToken(process.env.token);
 
     (async () => {
@@ -146,7 +133,7 @@ client.on("messageCreate", async message => {
 
 
 })
-client.login("OTUyNjc5NzM0NTc4MzgwODIw.Yi5iJA.qxtmJIJ4mqwYybnDJEyIB2yStDw")
+client.login(process.env.token)
 
 
 
