@@ -3,6 +3,7 @@ const { Prefix } = require("./config.json")
 const fs = require("node:fs")
 const { REST } = require('@discordjs/rest');
 const { Routes } = require('discord-api-types/v9');
+const commandconfig = require("./commands/config/cmdconfig.json")
 
 
 const levelFile = require("./data/levels.json")
@@ -44,7 +45,8 @@ client.slashCommands = new Collection()
 const slashCommands = []
 
 
-
+const guildId = commandconfig.guildid
+const clientid = commandconfig.clientid
 
 const CommandSlashFiles = fs.readdirSync('./slashcommands').filter(file => file.endsWith('.js'));
 
@@ -79,6 +81,7 @@ client.once("ready", () => {
     console.log("Online".green)
     client.user.setActivity("Tilburg", { type: "LISTENING" })
 })
+
 
 
 
