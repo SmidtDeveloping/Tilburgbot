@@ -3,6 +3,8 @@ const { Prefix } = require("./config.json")
 const fs = require("node:fs")
 const { REST } = require('@discordjs/rest');
 const { Routes } = require('discord-api-types/v9');
+
+
 const levelFile = require("./data/levels.json")
 const woordenScheld = require("./data/woorden.json")
 const woordenScheldtop = require("./data/kickwoorden.json")
@@ -38,8 +40,25 @@ const client = new Client({
 
 
 client.commands = new Collection();
+client.slashCommands = new Collection()
+const slashCommands = []
 
 
+
+
+const CommandSlashFiles = fs.readdirSync('./slashcommands').filter(file => file.endsWith('.js'));
+
+for (const fileslash of CommandSlashFiles) {
+    const commandSlash = require(`./slashcommands/${fileslash}`);
+    // Set a new item in the Collection
+    // With the key as the command name and the value as the exported module
+    client.slashCommands.set(commandSlash.data.name, commandSlash);
+
+    slashCommands.push(commandSlash.data.toJSON())
+    console.log(`Slashfile: ${commandSlash.data.name}`.green)
+
+
+}
 
 
 
@@ -55,22 +74,6 @@ for (const file of commandFiles) {
     console.log("-".repeat("36"))
 }
 
-const rest = new REST({ version: '9' }).setToken(process.env.token);
-
-(async () => {
-	try {
-		console.log('Started refreshing application (/) commands.');
-
-		await rest.put(
-			Routes.applicationGuildCommands(clientId, guildId),
-			{ body: commands },
-		);
-
-		console.log('Successfully reloaded application (/) commands.');
-	} catch (error) {
-		console.error(error);
-	}
-})();
 
 client.once("ready", () => {
     console.log("Online".green)
@@ -79,22 +82,23 @@ client.once("ready", () => {
 
 
 
+    const rest = new REST({ version: '9' }).setToken(process.env.token);
 
-
-    client.on('interactionCreate', async interaction => {
-        if (!interaction.isCommand()) return;
-    
-        const command = client.slashCommands.get(interaction.commandName);
-    
-        if (!command) return;
-    
+    (async () => {
         try {
-            await command.execute(interaction);
+            console.log('Started refreshing application (/) commands.');
+    
+            await rest.put(
+                Routes.applicationGuildCommands(clientId, guildId),
+                { body: commands },
+            );
+    
+            console.log('Successfully reloaded application (/) commands.');
         } catch (error) {
             console.error(error);
-            await interaction.reply({ content: 'There was an error while executing this command!', ephemeral: true });
         }
-    });
+    })();
+
 
 })
 
