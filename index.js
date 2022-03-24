@@ -45,43 +45,23 @@ for (const file of commandFiles) {
 client.once("ready", () => {
     console.log("Online".green)
     client.user.setActivity("Tilburg", { type: "LISTENING" })
-
-
-
-
-    // const guild = client.guilds.cache.get('920356898665021482')
-
-    // let commands
-
-    // if (guild) {
-    //     commands = guild.commands
-    // } else {
-    //     commands = client.application.commands
-    // }
-
-    // commands.create({
-    //     name: 'ping',
-    //     description: "Ponger"
-    // })
-
-
-
-    client.on('interactionCreate', async interaction => {
-        if (!interaction.isCommand()) return;
-    
-        const command = client.slashCommands.get(interaction.commandName);
-    
-        if (!command) return;
-    
-        try {
-            await command.execute(interaction);
-        } catch (error) {
-            console.error(error);
-            await interaction.reply({ content: 'There was an error while executing this command!', ephemeral: true });
-        }
-    });
-
 })
+
+
+client.on('interactionCreate', async interaction => {
+    if (!interaction.isCommand()) return;
+
+    const command = client.slashCommands.get(interaction.commandName);
+
+    if (!command) return;
+
+    try {
+        await command.execute(interaction);
+    } catch (error) {
+        console.error(error);
+        await interaction.reply({ content: 'There was an error while executing this command!', ephemeral: true });
+    }
+});
 
 client.on("messageCreate", async message => {
 
@@ -92,6 +72,7 @@ client.on("messageCreate", async message => {
 
     var command = messagearray[0]
 
+    
 
 
     if(!message.content.startsWith(Prefix)) {
@@ -113,7 +94,7 @@ client.on("messageCreate", async message => {
 
 
 })
-client.login(process.env.token)
+client.login("OTUyNjc5NzM0NTc4MzgwODIw.Yi5iJA.qxtmJIJ4mqwYybnDJEyIB2yStDw")
 
 
 
