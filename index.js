@@ -36,16 +36,10 @@ const client = new Client({
     ]
 })
 
-const commands = [];
-const commandslashFiles = fs.readdirSync('./slashcommands').filter(file => file.endsWith('.js'));
 
 client.commands = new Collection();
-client.slashCommands = new Collection();
 
-for (const file of commandFiles) {
-	const command = require(`./slashcommands/${file}`);
-	commands.push(command.data.toJSON());
-}
+
 
 
 
@@ -58,7 +52,6 @@ for (const file of commandFiles) {
     client.commands.set(command.help.name, command);
     console.log(`Command: ${command.help.name}, (${command.help.catogory})`.green)
     console.log(`Desc: ${command.help.description}`.green)
-    if (command.help.aliases === 2) console.log(comamnd.help.aliases)
     console.log("-".repeat("36"))
 }
 
